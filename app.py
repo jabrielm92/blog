@@ -2,8 +2,7 @@ from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, flash
 import firebase_admin
 from firebase_admin import credentials, firestore, storage
-from werkzeug.utils import secure_filename 
-from gunicorn.app.wsgiapp import WSGIApplication
+from werkzeug.utils import secure_filename
 
 # Initialize Firebase
 cred = credentials.Certificate({
@@ -130,8 +129,5 @@ def edit_post(post_id):
     return render_template('edit_post.html', post=post_data)
 
 if __name__ == '__main__':
-    options = {
-        'bind': '0.0.0.0:8000',
-        'workers': 4
-    }
-    WSGIApplication(app).run()
+    app.run(debug=True)
+    
