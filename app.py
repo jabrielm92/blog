@@ -34,7 +34,7 @@ def allowed_file(filename):
 
 @app.route('/')
 def index():
-    return render_template('blog.html')
+    return redirect(url_for('blog'))
 
 @app.route('/admin_dashboard', methods=['GET', 'POST'])
 def admin_dashboard():
