@@ -32,6 +32,10 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+@app.route('/')
+def index():
+    return render_template('blog.html')
+
 @app.route('/admin_dashboard', methods=['GET', 'POST'])
 def admin_dashboard():
     if request.method == 'POST':
@@ -129,5 +133,5 @@ def edit_post(post_id):
     return render_template('edit_post.html', post=post_data)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
     
