@@ -7,6 +7,7 @@ Posts can be text, img, video, or a combination of the 3.
 Edit post has is own page where the specific post is called to be edited.
 
 blog page: https://blog-kfuy.onrender.com/blog
+
 admin dashboard: https://blog-kfuy.onrender.com/admin_dashboard
 
 feel free to test them out. admin dash is enabled for create/edit/delete
