@@ -85,9 +85,21 @@ def delete_post(post_id):
 
 @app.route('/blog')
 def blog():
-    posts_ref = db.collection('posts').order_by('timestamp', direction=firestore.Query.DESCENDING)
-    posts = [doc.to_dict() for doc in posts_ref.stream()]
+    post_ref = db.collection('posts').order_by('timestamp', direction=firestore.Query.DESCENDING).limit(1)
+    posts = [doc.to_dict() for doc in post_ref.stream()]
     return render_template('blog.html', posts=posts)
+
+@app.route('/bloghistory')
+def bloghistory():
+    # Get the most recent post
+    recent_post = db.collection('posts').order_by('timestamp', direction=firestore.Query.DESCENDING).limit(1).get()
+    
+    # Get all posts except the most recent one
+    posts_ref = db.collection('posts').order_by('timestamp', direction=firestore.Query.DESCENDING).where('timestamp', '<', recent_post[0].to_dict()['timestamp']).limit(10)
+    posts = [doc.to_dict() for doc in posts_ref.stream()]
+    
+    return render_template('bloghistory.html', posts=posts)
+
 
 @app.route('/edit_post/<post_id>', methods=['GET', 'POST'])
 def edit_post(post_id):
